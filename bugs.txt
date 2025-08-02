@@ -1,0 +1,8 @@
+bugs
+go to setting settings not load immediately and after going edit page if remove image and click save nothing happen
+
+fix error messages and handle message properly
+
+whoever create workspace cant be delete or downgrade by other admin 
+
+users can change theme light or dark
