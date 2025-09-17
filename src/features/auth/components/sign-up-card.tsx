@@ -24,10 +24,11 @@ import { Button } from "@/components/ui/button";
 import { DottedSeparator } from "@/components/dotted-separator";
 import { signUpSchema } from "../schemas"
 import { useRegister } from "../api/use-register"
+import { signUpWithGithub, signUpWithGoogle } from "@/lib/oauth"
 
 
 export const SignUpCard = () => {
-      const {mutate,isPending}=useRegister();
+    const { mutate, isPending } = useRegister();
     const form = useForm<z.infer<typeof signUpSchema>>({
         resolver: zodResolver(signUpSchema),
         defaultValues: {
@@ -37,7 +38,7 @@ export const SignUpCard = () => {
         },
     })
     const onSubmit = (values: z.infer<typeof signUpSchema>) => {
-        mutate({json:values})
+        mutate({ json: values })
     }
     return (
         <Card className="size-full md:w-[487px] border-none shadow-none">
@@ -109,7 +110,7 @@ export const SignUpCard = () => {
                             )} />
 
                         <Button disabled={isPending} size={"lg"} className="w-full">
-                           Register
+                            Register
                         </Button>
                     </form>
                 </Form>
@@ -121,28 +122,30 @@ export const SignUpCard = () => {
                 <Button disabled={isPending} variant={"secondary"}
                     size={"lg"}
                     className="w-full"
+                    onClick={() => signUpWithGoogle()}
                 >
                     <FcGoogle className="mr-2 size-5" />
-                    Login with Google
+                    Signup with Google
                 </Button>
                 <Button disabled={isPending} variant={"secondary"}
                     size={"lg"}
                     className="w-full"
+                    onClick={() => signUpWithGithub()}
                 >
                     <FaGithub className="r-2 size-5" />
-                    Login with Github
+                    Signup with Github
                 </Button>
             </CardContent>
-             <div className="px-7">
+            <div className="px-7">
                 <DottedSeparator />
             </div>
-             <CardContent className="p-7 flex items-center justify-center">
-               <p>
-                Already have an account?
-                <Link href="/sign-in">
-                <span className="text-blue-700">&nbsp;Login</span>
-                </Link>
-               </p>
+            <CardContent className="p-7 flex items-center justify-center">
+                <p>
+                    Already have an account?
+                    <Link href="/sign-in">
+                        <span className="text-blue-700">&nbsp;Login</span>
+                    </Link>
+                </p>
             </CardContent>
         </Card>
     )

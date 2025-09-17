@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
 import {client} from "@/lib/rpc"
-import { th } from "date-fns/locale";
 
 export const useGetWorkspaces=()=>{
     const query=useQuery({

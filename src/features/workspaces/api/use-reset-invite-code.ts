@@ -4,11 +4,10 @@ import { toast } from "sonner";
 import { client } from "@/lib/rpc"
 
 
-type ResponseType = InferResponseType<typeof client.api.workspaces[":workspaceId"]["reset-invite-code"]["$post"],200>
+type ResponseType = InferResponseType<typeof client.api.workspaces[":workspaceId"]["reset-invite-code"]["$post"], 200>
 type RequestType = InferRequestType<typeof client.api.workspaces[":workspaceId"]["reset-invite-code"]["$post"]>;
 
 export const useResetInviteCode = () => {
-
     const queryClient = useQueryClient()
     const mutation = useMutation<
         ResponseType,
@@ -23,10 +22,10 @@ export const useResetInviteCode = () => {
             }
             return await response.json()
         },
-        onSuccess: ({data}) => {
+        onSuccess: ({ data }) => {
             toast.success("Invite Code Reset")
             queryClient.invalidateQueries({ queryKey: ["workspaces"] })
-             queryClient.invalidateQueries({ queryKey: ["workspace",data.$id] })
+            queryClient.invalidateQueries({ queryKey: ["workspace", data.$id] })
         },
         onError: () => {
             toast.error("Failed to reset invite code!");

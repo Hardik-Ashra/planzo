@@ -27,16 +27,8 @@ export const useCreateWorkspace = () => {
             toast.success("Workspace Created")
             queryClient.invalidateQueries({ queryKey: ["workspaces"] })
         },
-        onError: (error: any) => {
-            let message = error?.message || "Failed to create workspace!";
-            if (error?.response) {
-                try {
-                    const parsed = JSON.parse(error.response);
-                    if (parsed?.message) message = parsed.message;
-                } catch { }
-            }
-
-            toast.error(message);
+        onError: () => {
+            toast.error("Failed to create workspace!");
         },
     })
     return mutation

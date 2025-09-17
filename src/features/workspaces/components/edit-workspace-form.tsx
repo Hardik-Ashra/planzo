@@ -124,9 +124,7 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
         updateWorkspace(
             { form: finalValues, param: { workspaceId: initialValues.$id } },
             {
-                onSuccess: ({ data }) => {
-                    form.reset();
-                    router.push(`/workspaces/${data.$id}`);
+                onSuccess: () => {
                 },
                 onError: () => {
                     form.setError("root", {

@@ -24,7 +24,6 @@ import Image from "next/image";
 import { ImageIcon } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useRouter } from "next/navigation";
-import { on } from "events";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 

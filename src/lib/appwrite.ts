@@ -1,5 +1,4 @@
 import { AUTH_COOKIE } from "@/features/auth/constants";
-import { get } from "http";
 import { cookies } from "next/headers";
 import {
     Client,

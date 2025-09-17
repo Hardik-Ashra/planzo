@@ -1,6 +1,6 @@
 "use client"
 
-import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
+import { Avatar, AvatarFallback} from "@radix-ui/react-avatar"
 import {
     DropdownMenu,
     DropdownMenuContent,
