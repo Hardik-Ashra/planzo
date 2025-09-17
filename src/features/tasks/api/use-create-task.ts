@@ -4,10 +4,10 @@ import { toast } from "sonner";
 import { client } from "@/lib/rpc"
 
 
-type ResponseType = InferResponseType<typeof client.api.tasks["$post"],200>
+type ResponseType = InferResponseType<typeof client.api.tasks["$post"], 200>
 type RequestType = InferRequestType<typeof client.api.tasks["$post"]>;
 
-export const useCreateTask= () => {
+export const useCreateTask = () => {
 
     const queryClient = useQueryClient()
     const mutation = useMutation<
@@ -26,6 +26,8 @@ export const useCreateTask= () => {
         onSuccess: () => {
             toast.success("Task Created")
             queryClient.invalidateQueries({ queryKey: ["tasks"] })
+            queryClient.invalidateQueries({ queryKey: ["product-analytics"] })
+            queryClient.invalidateQueries({ queryKey: ["workspace-analytics"] })
         },
         onError: () => {
             toast.error("Failed to create task!")

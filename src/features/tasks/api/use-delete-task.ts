@@ -4,10 +4,10 @@ import { toast } from "sonner";
 import { client } from "@/lib/rpc"
 
 
-type ResponseType = InferResponseType<typeof client.api.tasks[":taskId"]["$delete"],200>
+type ResponseType = InferResponseType<typeof client.api.tasks[":taskId"]["$delete"], 200>
 type RequestType = InferRequestType<typeof client.api.tasks[":taskId"]["$delete"]>;
 
-export const useDeleteTask= () => {
+export const useDeleteTask = () => {
     const queryClient = useQueryClient()
     const mutation = useMutation<
         ResponseType,
@@ -22,14 +22,16 @@ export const useDeleteTask= () => {
             }
             return await response.json()
         },
-        onSuccess: ({data}) => {
+        onSuccess: ({ data }) => {
             toast.success("Task Deleted")
             queryClient.invalidateQueries({ queryKey: ["tasks"] })
-             queryClient.invalidateQueries({ queryKey: ["task",data.$id] })
+            queryClient.invalidateQueries({ queryKey: ["task", data.$id] })
+            queryClient.invalidateQueries({ queryKey: ["product-analytics"] })
+            queryClient.invalidateQueries({ queryKey: ["workspace-analytics"] })
         },
         onError: () => {
-           
-            toast.error( "Failed to Delete task!");
+
+            toast.error("Failed to Delete task!");
         },
     })
     return mutation
